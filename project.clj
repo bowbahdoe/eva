@@ -51,7 +51,7 @@
                                                                              commons-logging/commons-logging]]
                  [io.jaegertracing/jaeger-client "0.34.0"]
                  [io.opentracing/opentracing-api "0.32.0"]
-                 [org.clojure/java.jmx "0.3.3"]
+                 [org.clojure/java.jmx "1.0.0"]
                  [com.workiva/utiliva "0.2.1"]
                  [map-experiments/map-experiments "0.5.0-SNAPSHOT"]
                  [com.workiva/recide "1.0.1"]
