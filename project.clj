@@ -33,11 +33,11 @@
                  [funcool/cats "2.4.2"]
                  ;;^:source-dep [clj-radix "0.1.0"]
 
-                 [org.clojure/tools.cli "0.3.7"]
+                 [org.clojure/tools.cli "1.0.206"]
                  [org.clojure/java.jdbc "0.7.12"]
                  [org.clojure/core.unify "0.5.7"]
                  [com.mchange/c3p0 "0.9.5.5"]
-                 [com.h2database/h2 "1.4.197"]
+                 [com.h2database/h2 "2.1.210"]
                  [org.xerial/sqlite-jdbc "3.36.0.3"]
                  [org.mariadb.jdbc/mariadb-java-client "3.0.4"]
                  [mysql/mysql-connector-java "8.0.28"]
@@ -122,7 +122,7 @@
 
              :server            {:dependencies      [[ch.qos.logback/logback-classic "1.2.3"]
                                                      [org.apache.derby/derby "10.14.1.0"]
-                                                     [org.clojure/tools.cli "0.3.5"]
+                                                     [org.clojure/tools.cli "1.0.206"]
                                                      [com.workiva.eva.catalog/client.alpha "2.0.1"]]
                                  :source-paths      ["server/src"]
                                  :java-source-paths ["server/java-src"]
