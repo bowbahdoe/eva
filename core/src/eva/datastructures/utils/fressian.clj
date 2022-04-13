@@ -13,14 +13,16 @@
 ;; limitations under the License.
 
 (ns eva.datastructures.utils.fressian
-  (:require [eva.error :refer [insist]]))
+  (:require [eva.error :refer [insist]])
+  (:import (clojure.lang IFn)
+           (org.fressian.handlers ReadHandler WriteHandler)))
 
 (defprotocol Autological
   (get-var [this] "Returns the var that refers to this function."))
 
 (defrecord AutologicalFunction
-     [^clojure.lang.IFn f serial]
-   clojure.lang.IFn
+     [^IFn f serial]
+   IFn
    (invoke [_] (f))
    (invoke [_ arg0] (f arg0))
    (invoke [_ arg0 arg1] (f arg0 arg1))
@@ -53,7 +55,7 @@
      (f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 arg11 arg12 arg13 arg14 arg15 arg16 arg17 arg18))
    (invoke [_ arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 arg11 arg12 arg13 arg14 arg15 arg16 arg17 arg18 arg19]
      (f arg0 arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 arg9 arg10 arg11 arg12 arg13 arg14 arg15 arg16 arg17 arg18 arg19))
-   (applyTo [_ args] (.applyTo ^clojure.lang.IFn f args))
+   (applyTo [_ args] (.applyTo ^IFn f args))
    Autological
    (get-var [_] serial))
 
@@ -69,14 +71,14 @@
 ;; FRESSIAN HANDLERS
 
 (def autological-reader
-  (reify org.fressian.handlers.ReadHandler
-    (read [_ reader tag component-count]
+  (reify ReadHandler
+    (read [_ reader _ _]
       (let [obj (.readObject reader)]
         (insist (var? obj))
         @obj))))
 
 (def autological-writer
-  (reify org.fressian.handlers.WriteHandler
+  (reify WriteHandler
     (write [_ writer f]
       (.writeTag writer "eva/autological" 1)
       (.writeObject writer (get-var f)))))
