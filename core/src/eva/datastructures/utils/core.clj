@@ -13,11 +13,11 @@
 ;; limitations under the License.
 
 (ns eva.datastructures.utils.core
-  (:require [eva.error :refer [insist]]))
+  (:import (java.util Comparator)))
 
 (defn overlaps?
   "Given a comparator and two tuples representing ranges, returns true if the ranges overlap."
-  [^java.util.Comparator cmp [x1 x2] [y1 y2]]
+  [^Comparator cmp [x1 x2] [y1 y2]]
   (and (<= (.compare cmp x1 y2) 0)
        (<= (.compare cmp y1 x2) 0)))
 
@@ -28,7 +28,7 @@
   ([cmp f x fx coll]
    (if coll
      (let [fy (f (first coll))]
-       (if (= -1 (. ^java.util.Comparator cmp (compare fy fx)))
+       (if (= -1 (. ^Comparator cmp (compare fy fx)))
          (recur cmp f (first coll) fy (next coll))
          (recur cmp f x fx (next coll))))
      x)))
