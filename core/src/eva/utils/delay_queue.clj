@@ -13,10 +13,6 @@
 ;; limitations under the License.
 
 (ns eva.utils.delay-queue
-  (:require [eva.error :refer [insist]]
-            [manifold.deferred :as d]
-            [clojure.core.cache :as cache
-             :refer [fifo-cache-factory]])
   (:refer-clojure :exclude [memoize]))
 
 (defprotocol DelayedQueue
