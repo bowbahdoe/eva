@@ -302,10 +302,10 @@
                   "Cannot swap blocks with different ids")
 
         expected-attrs (dump-attrs (block/attributes expected-block))
-        ^bytes expected-val (.toByteArray (block/value expected-block))
+        ^bytes expected-val (.toByteArray ^ByteString (block/value expected-block))
 
         replacement-attrs (dump-attrs (block/attributes replacement-block))
-        ^bytes replacement-val (.toByteArray (block/value replacement-block))]
+        ^bytes replacement-val (.toByteArray ^ByteString (block/value replacement-block))]
 
     (-> (ExpressionSpecBuilder.)
         (.addUpdate (-> (spec-S "attrs") (.set replacement-attrs)))
