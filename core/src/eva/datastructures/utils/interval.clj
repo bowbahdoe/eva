@@ -15,7 +15,8 @@
 (ns eva.datastructures.utils.interval
   (:require [eva.datastructures.protocols :as protocols]
             [eva.datastructures.utils.comparators :as data-comp]
-            [utiliva.comparator :as comparison]))
+            [utiliva.comparator :as comparison])
+  (:import (org.fressian.handlers ReadHandler WriteHandler)))
 
 (defrecord Interval
     [low_ high_ low-open_ high-open_]
@@ -68,8 +69,8 @@
 ;; FRESSIAN HANDLERS
 
 (def interval-reader
-  (reify org.fressian.handlers.ReadHandler
-    (read [_ reader tag component-count]
+  (reify ReadHandler
+    (read [_ reader _ _]
       (let [low (.readObject reader)
             high (.readObject reader)
             open-low (.readObject reader)
@@ -77,7 +78,7 @@
         (->Interval low high open-low open-high)))))
 
 (def interval-writer
-  (reify org.fressian.handlers.WriteHandler
+  (reify WriteHandler
     (write [_ writer obj]
       (.writeTag writer "eva/interval" 4)
       (.writeObject writer (.low_ ^Interval obj))
