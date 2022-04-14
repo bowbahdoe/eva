@@ -23,7 +23,7 @@
                  [org.apache.activemq/activemq-client "5.17.0"
                   ;; exclude jms 1.1 api classes that conflict with jms 2.0 api classes
                   :exclusions [org.apache.geronimo.specs/geronimo-jms_1.1_spec]]
-                 [expound/expound "0.7.1"]
+                 [expound/expound "0.9.0"]
                  [com.stuartsierra/component "1.1.0"]
                  [org.slf4j/slf4j-api "1.7.36"]
                  [org.clojure/core.cache "1.0.225"]
