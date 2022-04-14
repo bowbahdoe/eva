@@ -22,8 +22,7 @@
 
 (def ^:private ^ThreadFactory pool-thread-factory
   (let [thread-counter (AtomicInteger.)
-        thread-group (-> (or (System/getSecurityManager)
-                             (Thread/currentThread))
+        thread-group (-> (Thread/currentThread)
                          (.getThreadGroup))
         thread-name-prefix (str *ns* "/pool-thread-")]
     (reify ThreadFactory
@@ -71,5 +70,5 @@
                       (println "error occurred:" err))))
 
   (swap! state inc)
-  (.cancel sf true)
-  )
+  (.cancel sf true))
+
