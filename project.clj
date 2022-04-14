@@ -35,6 +35,7 @@
 
                  [org.clojure/tools.cli "1.0.206"]
                  [org.clojure/java.jdbc "0.7.12"]
+                 [com.github.seancorfield/next.jdbc "1.2.780"]
                  [org.clojure/core.unify "0.5.7"]
                  [com.mchange/c3p0 "0.9.5.5"]
                  [com.h2database/h2 "2.1.210"]
