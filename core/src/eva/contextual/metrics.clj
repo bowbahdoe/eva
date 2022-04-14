@@ -80,12 +80,12 @@
     (register-metric metric-name timer)))
 
 (defmethod metric-constructor :gauge [_ [metric-type context]]
-(let [gauge-atom (atom 0)
-      explanation (->explanation context metric-type)
-      gauge       (barometer.core/gauge (fn [] @gauge-atom) explanation)
-      metric-name (->name context metric-type)]
-  (when (register-metric metric-name gauge)
-    (with-meta gauge {:set! (fn [x] (reset! gauge-atom x))}))))
+  (let [gauge-atom (atom 0)
+        explanation (->explanation context metric-type)
+        gauge       (barometer.core/gauge (fn [] @gauge-atom) explanation)
+        metric-name (->name context metric-type)]
+    (when (register-metric metric-name gauge)
+      (with-meta gauge {:set! (fn [x] (reset! gauge-atom x))}))))
 
 
 (defn release-metrics []
