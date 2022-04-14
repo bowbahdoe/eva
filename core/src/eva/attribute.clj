@@ -17,8 +17,7 @@
             [schema.core :as s]
             [map-experiments.smart-maps.bijection :refer [bijection]]
             [clojure.string :as cstr]
-            [plumbing.core :as pc])
-  (:import [eva.Attribute]))
+            [plumbing.core :as pc]))
 
 (err/deferror-group attribute-non-resolution
   (:attribute-resolution [:identifier])

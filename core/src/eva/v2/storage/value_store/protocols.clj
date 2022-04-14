@@ -13,9 +13,7 @@
 ;; limitations under the License.
 
 (ns eva.v2.storage.value-store.protocols
-  (:require [tesserae.impl]) ;; force generation of Tessera type.
-  (:import [java.util Map]
-           [tesserae.impl.Tessera]))
+  (:require [tesserae.impl])) ;; force generation of Tessera type.)
 
 (definterface IValueStorage
   (^String getPartition [] "Provides the string identifier this value store uses for multi-tenant partitioning.")
