@@ -12,15 +12,15 @@
                  [prismatic/plumbing "0.6.0"]
                  [org.clojure/data.avl "0.1.0"]
                  [com.rpl/specter "1.1.4"]
-                 [com.google.guava/guava "22.0"]
-                 [manifold/manifold "0.1.6"]
-                 [org.apache.activemq/artemis-core-client "2.4.0"]
-                 [org.apache.activemq/artemis-jms-client "2.4.0"]
-                 [org.apache.activemq/artemis-server "2.4.0"]
-                 [org.apache.activemq/artemis-jms-server "2.4.0"]
-                 [org.apache.activemq/artemis-openwire-protocol "2.4.0"
+                 [com.google.guava/guava "31.1-jre"]
+                 [manifold/manifold "0.2.3"]
+                 [org.apache.activemq/artemis-core-client "2.21.0"]
+                 [org.apache.activemq/artemis-jms-client "2.21.0"]
+                 [org.apache.activemq/artemis-server "2.21.0"]
+                 [org.apache.activemq/artemis-jms-server "2.21.0"]
+                 [org.apache.activemq/artemis-openwire-protocol "2.21.0"
                   :exclusions [org.apache.geronimo.specs/geronimo-jms_1.1_spec]]
-                 [org.apache.activemq/activemq-client "5.15.8"
+                 [org.apache.activemq/activemq-client "5.17.0"
                   ;; exclude jms 1.1 api classes that conflict with jms 2.0 api classes
                   :exclusions [org.apache.geronimo.specs/geronimo-jms_1.1_spec]]
                  [expound/expound "0.7.1"]
