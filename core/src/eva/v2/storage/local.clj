@@ -13,25 +13,24 @@
 ;; limitations under the License.
 
 (ns eva.v2.storage.local
-  (:require [eva.v2.storage.core :refer [BlockStorage ->Block]]
-            [eva.v2.storage.block-store.impl.sql :refer [map->SQLStorage]]
+  (:require [eva.v2.storage.core :refer [BlockStorage]]
             [eva.v2.storage.error :refer [raise-request-cardinality]]
             [recide.sanex :as sanex]
             [eva.config :refer [config-strict]]
             [eva.error :refer [insist]]
-            [clojure.java.jdbc :as jdbc]
-            [com.stuartsierra.component :as component :refer [start]])
+            [com.stuartsierra.component :as component]
+            [next.jdbc :as jdbc])
   (:import [java.io File]))
 
-(def schema-ddl
-  (str "CREATE TABLE IF NOT EXISTS "
-       "eva_kv( "
-       "namespace varchar(128), "
-       "id varchar(128), "
-       "attrs varchar(600), "
-       "val blob, "
-       "primary key (namespace, id)"
-       ")"))
+(def schema-ddl-sqlvec
+  [(str "CREATE TABLE IF NOT EXISTS "
+        "eva_kv( "
+        "namespace varchar(128), "
+        "id varchar(128), "
+        "attrs varchar(600), "
+        "val blob, "
+        "primary key (namespace, id)"
+        ")")])
 
 (defn db-spec
   [path]
@@ -45,7 +44,7 @@
   []
   (File/createTempFile (str "sql-test-db-" (swap! cntr inc)) "tmpdb"))
 
-(defn init-h2-db [db-conn] (jdbc/db-do-commands db-conn schema-ddl))
+(defn init-h2-db [db-conn] (jdbc/execute! db-conn schema-ddl-sqlvec))
 
 
 (def ^:private block->key (juxt eva.v2.storage.core/storage-namespace eva.v2.storage.core/storage-id))
