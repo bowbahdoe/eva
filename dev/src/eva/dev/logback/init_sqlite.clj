@@ -13,11 +13,11 @@
 ;; limitations under the License.
 
 (ns eva.dev.logback.init-sqlite
-  (:require [clojure.java.jdbc :as jdbc]))
+  (:require [next.jdbc :as jdbc]))
 
 (def create-table
   {:logging-event
-   "CREATE TABLE IF NOT EXISTS logging_event
+   ["CREATE TABLE IF NOT EXISTS logging_event
    (
      timestmp         BIGINT NOT NULL,
      formatted_message  TEXT NOT NULL,
@@ -34,35 +34,35 @@
      caller_method     VARCHAR(254) NOT NULL,
      caller_line       CHAR(4) NOT NULL,
      event_id          INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT
-   )"
+   )"]
 
    :logging-event-property
-   "CREATE TABLE IF NOT EXISTS logging_event_property
+   ["CREATE TABLE IF NOT EXISTS logging_event_property
    (
      event_id BIGINT NOT NULL,
      mapped_key VARCHAR (254) NOT NULL,
      mapped_value TEXT,
      PRIMARY KEY (event_id, mapped_key),
      FOREIGN KEY (event_id) REFERENCES logging_event (event_id)
-    )"
+    )"]
 
    :logging-event-exception
-   "CREATE TABLE IF NOT EXISTS logging_event_exception
+   ["CREATE TABLE IF NOT EXISTS logging_event_exception
    (
      event_id BIGINT NOT NULL,
      i SMALLINT NOT NULL,
      trace_line VARCHAR (254) NOT NULL,
      PRIMARY KEY (event_id, i),
      FOREIGN KEY (event_id) REFERENCES logging_event (event_id)
-   )"
-   })
+   )"]})
+
 
 (def default-file "logs/eva-dev.sqlite")
 (defn connection-uri [file] (str "jdbc:sqlite:" file))
 
 (defn -main [& [file]]
   (let [file (or file default-file)]
-    (jdbc/with-db-connection [conn (connection-uri file)]
-      (jdbc/db-do-commands conn (create-table :logging-event))
-      (jdbc/db-do-commands conn (create-table :logging-event-property))
-      (jdbc/db-do-commands conn (create-table :logging-event-exception)))))
+    (with-open [conn (jdbc/get-connection (connection-uri file))]
+      (jdbc/execute! conn (create-table :logging-event))
+      (jdbc/execute! conn (create-table :logging-event-property))
+      (jdbc/execute! conn (create-table :logging-event-exception)))))
