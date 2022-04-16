@@ -249,28 +249,6 @@ public final class ByteString implements IObj, Serializable {
         return this._meta;
     }
 
-//    public Iterable<ByteString> split(int chunkSize) {
-//        if(chunkSize <= 0) {
-//            throw new IllegalArgumentException("chunkSize must be greater than 0");
-//        }
-//        else if(chunkSize >= this.size()) {
-//            return clojureList(this);
-//        } else {
-//            TransientList<ByteString> v = Collider.<ByteString>clojureList().asTransient();
-//            ByteBuffer buf = this.toByteBuffer();
-//            int remaining = buf.remaining();
-//            while(remaining > 0) {
-//                int amount = remaining >= chunkSize ? chunkSize : remaining;
-//                byte[] chunk = new byte[amount];
-//                buf.get(chunk);
-//                v.append(ByteString.wrapping(chunk));
-//                remaining = buf.remaining();
-//            }
-//            return v.toPersistent();
-//        }
-//
-//    }
-
     public static ByteString join(Iterable<ByteString> chunks) {
         int totalSize = 0;
         for(ByteString chunk : chunks) {
