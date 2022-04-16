@@ -31,15 +31,15 @@ import java.util.function.Function;
  * Utility functions for working with eva and Clojure from Java.
  */
 public final class Util {
-    private static IFn apply = Clojure.var("clojure.core", "apply");
-    private static IFn vec = Clojure.var("clojure.core", "vec");
-    private static IFn hashMap = Clojure.var("clojure.core", "hash-map");
-    private static IFn arrayMap = Clojure.var("clojure.core", "array-map");
-    private static IFn name = Clojure.var("clojure.core", "name");
-    private static IFn namespace = Clojure.var("clojure.core", "namespace");
-    private static IFn cljTransient = Clojure.var("clojure.core", "transient");
-    private static IFn persistentBang = Clojure.var("clojure.core", "persistent!");
-    private static IFn assocBang = Clojure.var("clojure.core","assoc!");
+    private static final IFn apply = Clojure.var("clojure.core", "apply");
+    private static final IFn vec = Clojure.var("clojure.core", "vec");
+    private static final IFn hashMap = Clojure.var("clojure.core", "hash-map");
+    private static final IFn arrayMap = Clojure.var("clojure.core", "array-map");
+    private static final IFn name = Clojure.var("clojure.core", "name");
+    private static final IFn namespace = Clojure.var("clojure.core", "namespace");
+    private static final IFn cljTransient = Clojure.var("clojure.core", "transient");
+    private static final IFn persistentBang = Clojure.var("clojure.core", "persistent!");
+    private static final IFn assocBang = Clojure.var("clojure.core","assoc!");
 
 
     private Util () {}
