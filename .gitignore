@@ -26,3 +26,4 @@ pom.xml.asc
 compose_remote*
 .release-trigger
 *.lock
+.clj-kondo/.cache
