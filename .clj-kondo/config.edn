@@ -1,2 +1,3 @@
 {:lint-as {morphe.core/defn clojure.core/defn
-           quartermaster.core/defmanager clojure.core/def}}
+           quartermaster.core/defmanager clojure.core/def
+           potemkin/def-map-type clojure.core/deftype}}
