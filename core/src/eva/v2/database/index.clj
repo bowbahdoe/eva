@@ -307,5 +307,3 @@
 (defn flush-index [index]
   (debug "Flushing index:" (:name @index))
   (d-q/delay-queue (update @index :idx persist!)))
-
-(defn update-all-indexes [log index-roots target-tx])
