@@ -22,7 +22,7 @@ import java.nio.ByteBuffer;
 /**
  * InputStream implementation that reads bytes from an immutable ByteString
  */
-public class ByteStringInputStream extends InputStream {
+public final class ByteStringInputStream extends InputStream {
     ByteBuffer buf;
 
     public ByteStringInputStream(ByteString b) {
