@@ -22,7 +22,8 @@
    [eva.contextual.metrics :as metrics]
    [eva.contextual.logging :as logging]
    [eva.contextual.tracing :as tracing]
-   [morphe.core :as d])
+   [morphe.core :as d]
+   [recide.sanex.logging :as sanex-logging])
   (:refer-clojure :exclude [inc]))
 
 (def ^:dynamic *context* (c/->Context {} {}))
@@ -48,7 +49,7 @@
       (let [lexical (->Lexical &ns &name &params)]
         `(with-context
            (c/map->Context {:runtime (mixin-runtime ~runtime ::config/override)
-                                        :lexical ~lexical})
+                            :lexical ~lexical})
            ~@&body)))))
 
 (defn timed
@@ -98,7 +99,7 @@
          runtime-str (logging/runtime->str context "[" "]")
          context-str (str lexical-str runtime-str)
          message     (format "%s %s" context-str message)]
-     (recide.sanex.logging/log level message)))
+     (sanex-logging/log level message)))
   ([level message]
    (log *context* level message)))
 
@@ -122,5 +123,5 @@
   (config/enable! :a)
   (merge-runtime {} {:a "a"} ::config/as-per-config)
   (merge-runtime {:a "a" :b "b"} {:a "aa" :c "c"} ::config/as-per-config) ;; {:a "a" :b "bb" :c "c"}
-  (merge-runtime {:a "a" :b "b"} [:a :c] ::config/as-per-config) ;; {:a "a"}
-  )
+  (merge-runtime {:a "a" :b "b"} [:a :c] ::config/as-per-config)) ;; {:a "a"}
+
