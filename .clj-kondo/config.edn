@@ -1,0 +1,2 @@
+{:lint-as {morphe.core/defn clojure.core/defn
+           quartermaster.core/defmanager clojure.core/def}}
