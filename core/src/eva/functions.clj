@@ -89,7 +89,7 @@
     (cache/hit fn-cache dbfn)
     (cache/miss fn-cache dbfn (compile-db-fn dbfn))))
 
-(s/defrecord DBFn [lang :- (s/either (s/eq "clojure"))
+(s/defrecord DBFn [lang :- (s/eq "clojure")
                    params :- [s/Symbol]
                    code :- s/Str
                    imports :- (s/maybe s/Any)
