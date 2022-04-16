@@ -17,7 +17,7 @@
    [eva.contextual.logging :as logging]
    [eva.contextual.utils :as utils]
    [clojure.string :as str]
-   [barometer.core]
+   [barometer.core :as barometer]
    [quartermaster.core :as qu]
    [quartermaster.alpha :as qua])
   (:refer-clojure :exclude [inc]))
@@ -43,7 +43,7 @@
 (defn inc [context]
   "Contextual incremented: counter built out of current context get incremented"
   (let [counter (->counter context)]
-    (barometer.core/increment counter)))
+    (barometer/increment counter)))
 
 (defn- ->explanation
   [context metric-type]
@@ -64,25 +64,25 @@
     (str lexical runtime)))
 
 (defn- register-metric [metric-name metric]
-  (barometer.core/register barometer.core/DEFAULT metric-name metric))
+  (barometer/register barometer/DEFAULT metric-name metric))
 
 ;; Metrics Implemenentation
 (defmethod metric-constructor :counter [_ [metric-type context]]
   (let [explanation (->explanation context metric-type)
-        counter     (barometer.core/counter explanation)
+        counter     (barometer/counter explanation)
         metric-name (->name context metric-type)]
     (register-metric metric-name counter)))
 
 (defmethod metric-constructor :timer [_ [metric-type context]]
   (let [explanation (->explanation context metric-type)
-        timer       (barometer.core/timer explanation)
+        timer       (barometer/timer explanation)
         metric-name (->name context metric-type)]
     (register-metric metric-name timer)))
 
 (defmethod metric-constructor :gauge [_ [metric-type context]]
   (let [gauge-atom (atom 0)
         explanation (->explanation context metric-type)
-        gauge       (barometer.core/gauge (fn [] @gauge-atom) explanation)
+        gauge       (barometer/gauge (fn [] @gauge-atom) explanation)
         metric-name (->name context metric-type)]
     (when (register-metric metric-name gauge)
       (with-meta gauge {:set! (fn [x] (reset! gauge-atom x))}))))
