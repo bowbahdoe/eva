@@ -17,7 +17,7 @@
             [eva.core :as core
              :refer [entry->datoms safe-advance-index-better batch-advance-index]]
             [eva.v2.database.index :refer [db->type-attr-eids
-                                    open-indexes]]
+                                           open-indexes]]
             [eva.utils.delay-queue :as d-q]
             [barometer.aspects :refer [timed]]
             [morphe.core :as d]
