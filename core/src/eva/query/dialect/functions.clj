@@ -13,10 +13,8 @@
 ;; limitations under the License.
 
 (ns eva.query.dialect.functions
-  (:require [eva.attribute :refer [cardinality]]
-            [eva.core :refer [select-datoms multi-select-datoms-ordered]]
-            [eva.query.error :refer [raise-builtin]]
-            [eva.error :refer [raise]]))
+  (:require [eva.core :refer [multi-select-datoms-ordered]]
+            [eva.query.error :refer [raise-builtin]]))
 
 (defn get-else [coll-of-db-eid-attr-default]
   (let [grouped (group-by first coll-of-db-eid-attr-default)]
