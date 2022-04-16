@@ -22,7 +22,7 @@ import java.io.OutputStream;
 /**
  * OutputStream implementation that collects written bytes into an immutable ByteString
  */
-public class ByteStringOutputStream extends OutputStream {
+public final class ByteStringOutputStream extends OutputStream {
     ByteArrayOutputStream bout;
 
     public ByteStringOutputStream() {
