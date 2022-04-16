@@ -17,7 +17,8 @@
             [clojure.pprint :refer [pprint]]
             [barometer.core :as metrics])
   (:import (com.sun.net.httpserver HttpServer HttpHandler HttpExchange)
-           (java.net InetSocketAddress)))
+           (java.net InetSocketAddress)
+           (java.nio.charset StandardCharsets)))
 
 (defn default-status-code [_] 503)
 
@@ -35,7 +36,7 @@
          (.put "Content-Type" ["application/edn; charset=utf-8"]))
        (.sendResponseHeaders he (status-code data) (.length body))
        (with-open [os (.getResponseBody he)]
-         (.write os (.getBytes body "UTF-8")))))))
+         (.write os (.getBytes body StandardCharsets/UTF_8)))))))
 
 (defrecord StatusServer [host port data-fn]
   component/Lifecycle

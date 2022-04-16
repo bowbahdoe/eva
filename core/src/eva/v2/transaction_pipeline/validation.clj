@@ -29,8 +29,9 @@
             [morphe.core :as d]
             [ichnaie.core :refer [traced]]
             [clojure.string :as string])
-  (:import [java.util Date]
-           (eva.bytes BBA))
+  (:import (java.util Date)
+           (eva.bytes BBA)
+           (java.nio.charset StandardCharsets))
   (:refer-clojure :exclude [group-by]))
 
 (defprotocol TxDataAccess
@@ -92,7 +93,7 @@
 
 (defn attr-bytes-size-fn [attr]
   (case (ea/value-type attr)
-    :db.type/string (fn [^String s] (alength (.getBytes s "UTF-8")))
+    :db.type/string (fn [^String s] (alength (.getBytes s StandardCharsets/UTF_8)))
     :db.type/bytes (fn [^BBA b] (alength ^bytes (.ba b)))
     nil))
 

@@ -21,6 +21,7 @@ import clojure.lang.IPersistentMap;
 import com.google.common.io.ByteStreams;
 import java.io.*;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -107,11 +108,7 @@ public final class ByteString implements IObj, Serializable {
      * @return the UTF-8 encoded ByteString
      */
     public static ByteString copyFromUTF8(String s) {
-        try {
-            return new ByteString(s.getBytes("UTF-8"), false);
-        } catch (UnsupportedEncodingException e) {
-            throw(new RuntimeException(e));
-        }
+        return new ByteString(s.getBytes(StandardCharsets.UTF_8), false);
     }
 
     /**
