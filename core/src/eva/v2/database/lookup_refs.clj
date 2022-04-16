@@ -14,9 +14,9 @@
 
 (ns eva.v2.database.lookup-refs
   (:require
-   [eva.core :refer [entry->datoms safe-advance-index-better batch-advance-index] :as core]
+   [eva.core :as core]
    [eva.attribute :as attr]
-   [eva.error :refer [raise insist] :as ee]
+   [eva.error :refer [raise]]
    [utiliva.core :refer [partition-map]]))
 
 
