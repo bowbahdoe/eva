@@ -14,7 +14,8 @@
 
 (ns eva.query.dialect.sandbox
   (:require [eva.query.dialect.aggregates]
-            [eva.query.dialect.functions]))
+            [eva.query.dialect.functions])
+  (:import (clojure.lang Var)))
 
 (defn create-eval-ns []
   (let [ns-sym (symbol (str *ns* "." (gensym "evalns")))
@@ -23,8 +24,8 @@
       (refer-clojure :exclude '[eval min max rand])
       (refer 'eva.query.dialect.aggregates)
       (refer 'eva.query.dialect.functions))
-    (.setDynamic ^clojure.lang.Var (intern ns 'sym->edb))
-    (.setDynamic ^clojure.lang.Var (intern ns 'pattern-vars))
+    (.setDynamic ^Var (intern ns 'sym->edb))
+    (.setDynamic ^Var (intern ns 'pattern-vars))
     ns))
 
 ;; ^^^^^ sym->edb ^^^^^^
