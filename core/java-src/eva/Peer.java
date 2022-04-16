@@ -21,9 +21,9 @@ import java.util.*;
 import java.util.function.Function;
 
 public final class Peer {
-    private static IFn require = Clojure.var("clojure.core", "require");
-    private static IFn seq = Clojure.var("clojure.core", "seq");
-    private static IFn apply = Clojure.var("clojure.core", "apply");
+    private static final IFn require = Clojure.var("clojure.core", "require");
+    private static final IFn seq = Clojure.var("clojure.core", "seq");
+    private static final IFn apply = Clojure.var("clojure.core", "apply");
 
     // This static block is executed at class-load-time.
     // TAKE CARE when adding slow-running code here, as this
